@@ -1,0 +1,24 @@
+<div class="col-md-8 col-xs-12">
+    <table class="table">
+      <tr>
+        <td><h4>Order Summary</h4></td>
+      </tr>
+      <tr>
+        <td>
+          {% for item in order.get_cart_items %}
+            <tr>
+              <td>{{ item }}</td>
+              <td>${{ item.product.price }}</td>
+            </tr>
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Order Total</strong> </td>
+        <td> <strong>${{ order.get_cart_total }}</strong></td>
+      </tr>
+    </table>
+    <a href = "{% url 'cart:train' %}">
+    <button  class="btn btn-warning" style="width: 100%;">Buy</button>
+    </a>
+</div>

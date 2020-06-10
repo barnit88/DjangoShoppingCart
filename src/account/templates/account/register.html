@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+
+<style>
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}      
+</style>
+</head>
+<body >
+    <form class="form-signin" method = "post" enctype="multipart/form-data">
+        <div class = "d-flex flex-column pb-3">
+       </div>
+
+        {% csrf_token %}
+
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+        
+        <label class ="any" for="inputEmail">Email Address</label>
+        <input type="email" name = "email" id="inputEmail" class="form-control"
+        placeholder="Email address" required= true value = "{{ form.initial.email }}"/>
+        
+
+        <label class ="any" for="inputName">Name</label>
+        <input type="text" name = "name" id="inputName" 
+        class="form-control" placeholder="Name" required = true value = "{{ form.initial.name }}"/>
+    
+        <label class ="any" for="inputContact">Contact Number</label>
+        <input type="numeric" name = "contact" 
+        pattern="[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+"
+        id="inputContact" class="form-control" placeholder="Contact" 
+        required= true value = "{{ form.initial.contact }}"/>
+        
+        <label class = "any" for="birthdate">Birthday:</label>
+        <input type="date" name="date_of_birth" id="bitrthdate" name="birthday">
+        
+        <label for="id_image">Image</label>
+        <input  type="file" name = "image" id = "id_image" accept="image/*" >
+       
+        <label class ="any" for="inputPassword1">Password</label>
+        <input type="password" name = "password1" id="inputPassword1" class="form-control"
+        placeholder="Password" required = true readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" />
+
+        <label class ="any" for="inputPassword2">Re-type Password</label>
+        <input type="password" name = "password2" id="inputPassword2" class="form-control"
+        placeholder="Password" required= true readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly','');" />
+
+        {% if messsage %}
+          {{ message }}
+        {% endif %}
+          
+
+            {% for feild in form %}
+                    {% for error in feild.errors %}
+                        <small style = "color : red" >{{ error }} </small>
+                    {% endfor %}
+            {% endfor %}
+            
+
+            {% if form.non_field_errors %}
+                <div style = "color:red">
+                    <p>{{ form.non_field_errors }}</p>
+                </div>
+            {% endif %}
+                
+        <button class="btn btn-lg btn-primary btn-block update" type="submit">Register</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+    </form>
+</body>
+</html>
+
+
+
+{% endblock content %}
+
